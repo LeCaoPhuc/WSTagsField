@@ -690,7 +690,7 @@ extension WSTagsField {
     }
 
     fileprivate func updatePlaceholderTextVisibility() {
-        textField.
+        textField.attributedPlaceholder
         = (placeholderAlwaysVisible || tags.count == 0) ? attributedPlaceholder() : nil
     }
 
