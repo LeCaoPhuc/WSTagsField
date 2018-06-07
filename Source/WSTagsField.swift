@@ -690,18 +690,19 @@ extension WSTagsField {
     }
 
     fileprivate func updatePlaceholderTextVisibility() {
-        textField.attributedPlaceholder = (placeholderAlwaysVisible || tags.count == 0) ? attributedPlaceholder() : nil
+        textField.
+        = (placeholderAlwaysVisible || tags.count == 0) ? attributedPlaceholder() : nil
     }
 
     private func attributedPlaceholder() -> NSAttributedString {
         var attributes: [NSAttributedStringKey: Any]?
         if let placeholderColor = placeholderColor {
-            attributes = [NSAttributedStringKey.foregroundColor: placeholderColor]
+            attributes = [NSForegroundColorAttributeName: placeholderColor] as [NSAttributedStringKey : Any]
         }
-        return NSAttributedString(string: placeholder, attributes: attributes)
+        return NSAttributedString(string: placeholder, attributes: attributes as! [String : Any])
     }
 
-    private var maxHeightBasedOnNumberOfLines: CGFloat {
+    public var maxHeightBasedOnNumberOfLines: CGFloat {
         guard self.numberOfLines > 0 else {
             return CGFloat.infinity
         }
