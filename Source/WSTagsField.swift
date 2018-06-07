@@ -15,7 +15,7 @@ public enum WSTagAcceptOption {
 }
 
 open class WSTagsField: UIScrollView {
-    open weak  var wSTagAcceptOptionSpace : WSTagAcceptOption   = WSTagAcceptOption.space;
+    open var wSTagAcceptOptionSpace : WSTagAcceptOption   = WSTagAcceptOption.space;
     fileprivate let textField = BackspaceDetectingTextField()
 
     /// Dedicated text field delegate.
