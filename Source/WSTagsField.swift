@@ -15,7 +15,9 @@ public enum WSTagAcceptOption {
 }
 
 open class WSTagsField: UIScrollView {
-    open var wSTagAcceptOptionSpace : WSTagAcceptOption   = WSTagAcceptOption.space;
+    fileprivate var wSTagAcceptOptionReturn : Int = 1;
+    fileprivate var wSTagAcceptOptionComma : Int = 2;
+    fileprivate var wSTagAcceptOptionSpace : Int = 3;
     fileprivate let textField = BackspaceDetectingTextField()
 
     /// Dedicated text field delegate.
@@ -147,7 +149,7 @@ open class WSTagsField: UIScrollView {
     }
 
     /// By default, the return key is used to create a tag in the field. You can change it, i.e., to use comma or space key instead.
-    open var acceptTagOption: WSTagAcceptOption = .return
+    open var acceptTagOption: Int =  1;
 
     @available(*, unavailable, message: "Use 'contentInset' instead.")
     open var padding: UIEdgeInsets = UIEdgeInsets.zero
@@ -698,9 +700,9 @@ extension WSTagsField {
     private func attributedPlaceholder() -> NSAttributedString {
         var attributes: [NSAttributedStringKey: Any]?
         if let placeholderColor = placeholderColor {
-            attributes = [NSForegroundColorAttributeName: placeholderColor] as [NSAttributedStringKey : Any]
+            attributes = [NSAttributedStringKey.foregroundColor: placeholderColor] as [NSAttributedStringKey : Any]
         }
-        return NSAttributedString(string: placeholder, attributes: attributes as! [String : Any])
+        return NSAttributedString(string: placeholder, attributes: attributes as! [NSAttributedStringKey : Any])
     }
 
     public var maxHeightBasedOnNumberOfLines: CGFloat {
@@ -724,7 +726,7 @@ extension WSTagsField: UITextFieldDelegate {
     }
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if acceptTagOption == .return && onShouldAcceptTag?(self) ?? true {
+        if acceptTagOption == 1 && onShouldAcceptTag?(self) ?? true {
             tokenizeTextFieldText()
             return true
         }
@@ -736,11 +738,11 @@ extension WSTagsField: UITextFieldDelegate {
     }
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if acceptTagOption == .comma && string == "," && onShouldAcceptTag?(self) ?? true {
+        if acceptTagOption == 2 && string == "," && onShouldAcceptTag?(self) ?? true {
             tokenizeTextFieldText()
             return false
         }
-        if acceptTagOption == .space && string == " " && onShouldAcceptTag?(self) ?? true {
+        if acceptTagOption == 3 && string == " " && onShouldAcceptTag?(self) ?? true {
             tokenizeTextFieldText()
             return false
         }
