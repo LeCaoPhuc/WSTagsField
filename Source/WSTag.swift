@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WSTag: Hashable {
+public class WSTag: Hashable {
 
     public let text: String
 
