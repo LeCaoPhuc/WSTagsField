@@ -209,6 +209,14 @@ open class WSTagsField: UIScrollView {
     /// Called when the text field text has changed. You should update your autocompleting UI based on the text supplied.
     open var onDidChangeText: ((WSTagsField, _ text: String?) -> Void)?
     
+    /// Callled when focus textField
+    
+    open var onDidChangeFocusTextField: ((_ textField : UITextField) -> Void)?
+    
+    /// Called when blur textField
+    
+    open var onDidChangeBlurTextField: ((_ textField : UITextField) -> Void)?
+    
     /// Called when a tag has been added. You should use this opportunity to update your local list of selected items.
     open var onDidAddTag: ((WSTagsField, _ tag: String) -> Void)?
     
@@ -755,11 +763,14 @@ extension WSTagsField: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         textDelegate?.textFieldDidBeginEditing?(textField)
         unselectAllTagViewsAnimated(true)
+        onDidChangeFocusTextField!(textField);
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         textDelegate?.textFieldDidEndEditing?(textField)
+        onDidChangeBlurTextField!(textField);
     }
+
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if acceptTagOption == 1 && onShouldAcceptTag?(self) ?? true {
