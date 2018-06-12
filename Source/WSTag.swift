@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WSTag: Hashable {
+open class WSTag: Hashable {
 
     public let text: String
 
