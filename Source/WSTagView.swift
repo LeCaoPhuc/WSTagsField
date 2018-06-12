@@ -61,7 +61,7 @@ open class WSTagView: UIView {
         }
     }
     
-    open override var tintColor: UIColor! {
+    open var backgroundColorTagView: UIColor! {
         didSet { updateContent(animated: false) }
     }
     
@@ -133,7 +133,7 @@ open class WSTagView: UIView {
     }
     
     fileprivate func updateColors() {
-        self.backgroundColor = selected ? selectedColor : tintColor
+        self.backgroundColor = selected ? selectedColor : backgroundColorTagView
         textLabel.textColor = selected ? selectedTextColor : textColor
     }
     

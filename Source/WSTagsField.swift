@@ -16,7 +16,7 @@ public enum WSTagAcceptOption {
 open class WSTagsField: UIScrollView {
     fileprivate var wSTagAcceptOptionReturn : Int = 1;
     fileprivate var wSTagAcceptOptionComma : Int = 2;
-    fileprivate var wSTagAcceptOptionSpace : Int = 3;
+    fileprivate var wSTagAcceptOptionSpace : Int = 30;
     fileprivate let textField = BackspaceDetectingTextField()
     /// Dedicated text field delegate.
     open weak var textDelegate: UITextFieldDelegate?
@@ -32,6 +32,11 @@ open class WSTagsField: UIScrollView {
     open override var tintColor: UIColor! {
         didSet {
             tagViews.forEach { $0.tintColor = self.tintColor }
+        }
+    }
+    open var backgroundTagView: UIColor! {
+        didSet {
+            tagViews.forEach { $0.backgroundColor = self.backgroundTagView }
         }
     }
     open var clearButtonIcon: String = "" {
@@ -343,7 +348,7 @@ open class WSTagsField: UIScrollView {
         
         let tagView = WSTagView(tag: tag)
         tagView.font = self.font
-        tagView.tintColor = self.tintColor
+        tagView.backgroundColorTagView = self.backgroundTagView
         tagView.textColor = self.textColor
         tagView.selectedColor = self.selectedColor
         tagView.selectedTextColor = self.selectedTextColor
