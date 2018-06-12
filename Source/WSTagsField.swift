@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 public enum WSTagAcceptOption {
     case `return`
     case comma
@@ -22,10 +21,10 @@ open class WSTagsField: UIScrollView {
     /// Dedicated text field delegate.
     open weak var textDelegate: UITextFieldDelegate?
     
-    open func getTags() -> [WSTag] {
-        var arrayTags = [WSTag]();
+    open func getTags() -> [String] {
+        var arrayTags = [String]();
         self.tags.forEach { (tag) in
-            arrayTags.append(tag);
+            arrayTags.append(tag.text);
         }
         return arrayTags;
     }
@@ -206,10 +205,10 @@ open class WSTagsField: UIScrollView {
     open var onDidChangeText: ((WSTagsField, _ text: String?) -> Void)?
     
     /// Called when a tag has been added. You should use this opportunity to update your local list of selected items.
-    open var onDidAddTag: ((WSTagsField, _ tag: WSTag) -> Void)?
+    open var onDidAddTag: ((WSTagsField, _ tag: String) -> Void)?
     
     /// Called when a tag has been removed. You should use this opportunity to update your local list of selected items.
-    open var onDidRemoveTag: ((WSTagsField, _ tag: WSTag) -> Void)?
+    open var onDidRemoveTag: ((WSTagsField, _ tag: String) -> Void)?
     
     /// Called when a tag has been selected.
     open var onDidSelectTagView: ((WSTagsField, _ tag: WSTagView) -> Void)?
@@ -385,7 +384,7 @@ open class WSTagsField: UIScrollView {
         
         self.textField.text = ""
         
-        onDidAddTag?(self, tag)
+        onDidAddTag?(self, tag.text)
         
         // Clearing text programmatically doesn't call this automatically
         onTextFieldDidChange(self.textField)
@@ -414,7 +413,7 @@ open class WSTagsField: UIScrollView {
         
         let removedTag = self.tags[index]
         self.tags.remove(at: index)
-        onDidRemoveTag?(self, removedTag)
+        onDidRemoveTag?(self, removedTag.text)
         
         updatePlaceholderTextVisibility()
         repositionViews()
