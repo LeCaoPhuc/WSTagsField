@@ -21,6 +21,14 @@ open class WSTagsField: UIScrollView {
     fileprivate let textField = BackspaceDetectingTextField()
     /// Dedicated text field delegate.
     open weak var textDelegate: UITextFieldDelegate?
+    
+    open func getTags() -> [String] {
+        var arrayTags = [String]();
+        self.tags.forEach { (tag) in
+            arrayTags.append(tag.text);
+        }
+        return arrayTags;
+    }
     /// Background color for tag view in normal (non-selected) state.
     open override var tintColor: UIColor! {
         didSet {
