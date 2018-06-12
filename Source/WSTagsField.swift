@@ -22,10 +22,10 @@ open class WSTagsField: UIScrollView {
     /// Dedicated text field delegate.
     open weak var textDelegate: UITextFieldDelegate?
     
-    open func getTags() -> [String] {
-        var arrayTags = [String]();
+    open func getTags() -> [WSTag] {
+        var arrayTags = [WSTag]();
         self.tags.forEach { (tag) in
-            arrayTags.append(tag.text);
+            arrayTags.append(tag);
         }
         return arrayTags;
     }
