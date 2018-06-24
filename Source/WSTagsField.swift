@@ -403,7 +403,7 @@ open class WSTagsField: UIScrollView {
         onTextFieldDidChange(self.textField)
         
         updatePlaceholderTextVisibility()
-        self.setContentOffset(CGPoint(x: 0, y: bounds.size.height), animated: true);
+        self.setContentOffset(CGPoint(x: 0, y: contentSize.height), animated: true);
         repositionViews()
     }
     
